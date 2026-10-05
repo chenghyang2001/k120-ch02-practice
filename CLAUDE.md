@@ -48,7 +48,7 @@ uvx ruff check                                      # lint
   - `POST /api/watermark?output=&text=`：body 是 PDF 原始 bytes（不用 multipart，因 Python 3.13 起已移除 `cgi`）；上限 50MB。
   - 處理結果放在 `tempfile.mkdtemp()` 的 job 目錄，`GET /download/<job id>` 下載；伺服器結束時清除。
   - 浮水印字型是 Helvetica-Bold，不含中文字形，非 Latin-1 文字一律回 400。
-- 前端在 `front_end/`（index.html / style.css / app.js / bg.svg 自製底圖），使用者資料一律用 `textContent` 插入。
+- 前端在 `front_end/`（index.html / index.css / index.js / bg.svg 自製底圖，檔案規範見 `front_end/CLAUDE.md`），使用者資料一律用 `textContent` 插入。
 
 ## 錯誤處理慣例
 
