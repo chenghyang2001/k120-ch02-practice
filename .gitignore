@@ -1,0 +1,29 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+.ruff_cache/
+.pytest_cache/
+
+# 產生的 PDF（可用 make_sample_pdf.py / add_watermark.py 重建）
+*.pdf
+*.pdf.tmp
+
+# Claude Code 本機設定
+.claude/settings.local.json
+.claude/session-state.md
+
+# 機密
+.env
+credentials.json
+token.json
+
+# 當機 / 垃圾檔
+*.stackdump
+core
+*.core
+*.dmp
+*~
+*.swp
+.DS_Store
+Thumbs.db
