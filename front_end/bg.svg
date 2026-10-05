@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- 自行生成的高科技底圖：深藍漸層 + 網格 + 電路走線 + 光點 -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#0d2a52"/>
+      <stop offset="55%" stop-color="#071328"/>
+      <stop offset="100%" stop-color="#03070f"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#00e5ff" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#7c4dff" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+
+  <!-- 電路走線 -->
+  <g fill="none" stroke="url(#trace)" stroke-width="2" stroke-linecap="round">
+    <path d="M0 160H260L320 220H620L660 180H900"/>
+    <path d="M0 300H140L200 360H420"/>
+    <path d="M1600 120H1340L1280 180H1020L980 140H760"/>
+    <path d="M1600 280H1440L1380 340H1180"/>
+    <path d="M0 700H220L280 640H560L600 680H820"/>
+    <path d="M0 820H360L400 780H640"/>
+    <path d="M1600 740H1380L1320 680H1060L1020 720H840"/>
+    <path d="M1600 600H1480L1420 540H1220"/>
+    <path d="M800 0V80L840 120V200"/>
+    <path d="M800 900V820L760 780V700"/>
+  </g>
+
+  <!-- 走線端點的光點 -->
+  <g fill="#00e5ff">
+    <circle cx="900" cy="180" r="4"/>
+    <circle cx="420" cy="360" r="4"/>
+    <circle cx="760" cy="140" r="4"/>
+    <circle cx="1180" cy="340" r="4"/>
+    <circle cx="820" cy="680" r="4"/>
+    <circle cx="640" cy="780" r="4"/>
+    <circle cx="840" cy="720" r="4"/>
+    <circle cx="1220" cy="540" r="4"/>
+    <circle cx="840" cy="200" r="4"/>
+    <circle cx="760" cy="700" r="4"/>
+  </g>
+  <g fill="#00e5ff" opacity="0.6" filter="url(#blur)">
+    <circle cx="900" cy="180" r="10"/>
+    <circle cx="1180" cy="340" r="10"/>
+    <circle cx="820" cy="680" r="10"/>
+    <circle cx="420" cy="360" r="10"/>
+  </g>
+
+  <!-- 同心圓掃描環 -->
+  <g fill="none" stroke="#7c4dff" stroke-opacity="0.18">
+    <circle cx="800" cy="450" r="300" stroke-width="1"/>
+    <circle cx="800" cy="450" r="380" stroke-width="1" stroke-dasharray="6 14"/>
+    <circle cx="800" cy="450" r="470" stroke-width="2" stroke-dasharray="2 22"/>
+  </g>
+
+  <!-- 角落六角形點陣 -->
+  <g fill="none" stroke="#00e5ff" stroke-opacity="0.15">
+    <polygon points="1460,780 1490,762 1520,780 1520,814 1490,832 1460,814"/>
+    <polygon points="1520,814 1550,796 1580,814 1580,848 1550,866 1520,848"/>
+    <polygon points="80,60 110,42 140,60 140,94 110,112 80,94"/>
+    <polygon points="140,94 170,76 200,94 200,128 170,146 140,128"/>
+  </g>
+</svg>

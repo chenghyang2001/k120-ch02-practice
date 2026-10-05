@@ -384,7 +384,16 @@ def process_file(pdf_path: Path) -> bool:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """CLI 進入點：逐檔處理，單一檔案失敗不中斷其他檔案；有任何失敗回傳 1。"""
+    """CLI 進入點：逐檔處理，單一檔案失敗不中斷其他檔案；有任何失敗回傳 1。
+
+    沒有任何命令列引數時改為啟動網頁版（見 web_server.py）。
+    """
+    if argv is None:
+        argv = sys.argv[1:]
+    if not argv:
+        # 延遲 import：CLI 模式不需要載入 http.server，也避免與 web_server 的循環 import
+        from web_server import run_server
+        return run_server()
     # pypdf 內部會以英文 logging 警告輕微格式問題，會淹沒繁中錯誤訊息，只保留 ERROR 以上
     logging.getLogger("pypdf").setLevel(logging.ERROR)
     args = parse_args(argv)

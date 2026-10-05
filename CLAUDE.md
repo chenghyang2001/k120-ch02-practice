@@ -20,6 +20,7 @@ PDF 浮水印練習專案：`add_watermark.py` 在 PDF 每一頁疊上 "Confiden
 ```bash
 PYTHONUTF8=1 uv run make_sample_pdf.py              # 產生 sample.pdf（5 種尺寸）與 sample_rotated.pdf（7 頁邊界情況）
 PYTHONUTF8=1 uv run add_watermark.py sample.pdf     # → sample_wm.pdf；可一次傳多個檔
+PYTHONUTF8=1 uv run add_watermark.py                # 無引數 → 啟動網頁版 http://127.0.0.1:5050/
 uvx ruff check                                      # lint
 ```
 
@@ -39,6 +40,15 @@ uvx ruff check                                      # lint
 - **`compact_output` 必須在所有 merge 之後**，且 `compress_content_streams` 與 `compress_identical_objects(remove_unreferenced=True)` 兩步都要做（只壓縮不清孤兒物件，檔案反而變大）。
 - overlay 依 `(寬, 高, rotation, text)` 快取。
 - `ensure_unique_contents` 使用 pypdf 私有 API `writer._add_object`；`compact_output` 依賴 `compress_identical_objects` 單次掃描的行為。兩者都只在 pypdf 6.19 驗證過，升級 pypdf 後要重新驗證「每頁剛好一個浮水印」。
+
+## 網頁版（需求見 `web_prd.md`）
+
+- `add_watermark.py` 的 `main()` 在沒有命令行引數時延遲 import `web_server.run_server()`；有引數時走原 CLI。
+- `web_server.py`：標準庫 `ThreadingHTTPServer`，只綁 `127.0.0.1:5050`，零額外依賴。
+  - `POST /api/watermark?output=&text=`：body 是 PDF 原始 bytes（不用 multipart，因 Python 3.13 起已移除 `cgi`）；上限 50MB。
+  - 處理結果放在 `tempfile.mkdtemp()` 的 job 目錄，`GET /download/<job id>` 下載；伺服器結束時清除。
+  - 浮水印字型是 Helvetica-Bold，不含中文字形，非 Latin-1 文字一律回 400。
+- 前端在 `front_end/`（index.html / style.css / app.js / bg.svg 自製底圖），使用者資料一律用 `textContent` 插入。
 
 ## 錯誤處理慣例
 

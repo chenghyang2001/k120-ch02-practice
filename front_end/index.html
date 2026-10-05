@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF 浮水印工具</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="panel" aria-labelledby="page-title">
+    <h1 id="page-title">PDF 浮水印工具</h1>
+
+    <form id="wmForm" class="form-grid" novalidate>
+      <label for="pdfPicker">要加浮水印的 PDF：</label>
+      <!-- 外觀是文字框，點擊後由 app.js 觸發隱藏的檔案選擇器 -->
+      <input id="pdfPicker" type="text" readonly placeholder="按一下選取 PDF 檔" aria-describedby="pdfHint">
+      <input id="pdfFile" type="file" accept="application/pdf,.pdf" hidden>
+
+      <label for="outputName">輸出檔名：</label>
+      <input id="outputName" type="text" disabled placeholder="請先選取 PDF">
+
+      <label for="wmText">浮水印文字：</label>
+      <input id="wmText" type="text" value="Confidential" maxlength="100">
+
+      <span></span>
+      <button id="startBtn" type="submit" disabled>開始</button>
+    </form>
+
+    <p id="pdfHint" class="hint">檔案大小上限 50MB；浮水印文字目前只支援英文、數字與符號。</p>
+    <div id="result" class="result" role="status" aria-live="polite"></div>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

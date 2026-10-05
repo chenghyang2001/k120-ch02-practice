@@ -1,0 +1,168 @@
+/* 深色高科技風：背景為自行生成的 bg.svg，面板用半透明玻璃質感 */
+:root {
+  --bg: #050b18;
+  --panel: rgba(8, 20, 40, 0.72);
+  --border: rgba(0, 229, 255, 0.35);
+  --accent: #00e5ff;
+  --accent-2: #7c4dff;
+  --text: #e3f2fd;
+  --muted: #7f9bb8;
+  --error: #ff5c7a;
+  --ok: #4dffb5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--bg) url("/bg.svg") center / cover no-repeat fixed;
+  color: var(--text);
+  font-family: "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+}
+
+.panel {
+  width: 100%;
+  max-width: 620px;
+  padding: 32px 36px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow:
+    0 0 40px rgba(0, 229, 255, 0.15),
+    inset 0 0 24px rgba(124, 77, 255, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+h1 {
+  margin: 0 0 28px;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px 12px;
+  align-items: center;
+}
+
+label {
+  justify-self: end;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+#pdfPicker {
+  cursor: pointer;
+}
+
+input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button {
+  justify-self: start;
+  padding: 10px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #031018;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    filter 0.2s,
+    box-shadow 0.2s;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.15);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.6);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin: 20px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.result {
+  margin-top: 16px;
+  min-height: 1.5em;
+  word-break: break-all;
+}
+
+.result a {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.result .error {
+  color: var(--error);
+}
+.result .warn {
+  color: #ffd166;
+}
+
+/* 手機寬度：標籤改放在輸入框上方 */
+@media (max-width: 520px) {
+  .panel {
+    padding: 24px 18px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  label {
+    justify-self: start;
+    margin-top: 8px;
+  }
+  .form-grid > span {
+    display: none;
+  }
+  button {
+    justify-self: stretch;
+    margin-top: 12px;
+  }
+}
